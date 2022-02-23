@@ -2,9 +2,9 @@
 
 LVL="$1"
 PASS="$2"
-dir="$HOME/over_the_wire"
-passFile="$dir/passwords.json"
-oldPassFile="$dir/bkp_passwords.json"
+dir="$HOME/.otw_helpers"
+passFile="passwords.json"
+oldPassFile="bkp_passwords.json"
 tmpFile="/tmp/overthewire_savepass.tmp"
 
 # Create and move to dir
@@ -17,7 +17,7 @@ if [ ! jq  ]; then
 fi
 
 # create missing files - backup pass file
-if [ ! -f $passFile ]; then
+if [ ! -s $passFile ]; then
 	echo "Creating pass file ($passFile)"
 	echo '{}' > $passFile
 else
