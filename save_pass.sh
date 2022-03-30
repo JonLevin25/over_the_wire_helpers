@@ -1,11 +1,25 @@
 #!/bin/bash
 
-LVL="$1"
-PASS="$2"
-dir="$HOME/.otw_helpers"
+GAME="$1"
+LVL="$2"
+PASS="$3"
+dir="$HOME/.otw_helpers/$GAME"
 passFile="passwords.json"
 oldPassFile="bkp_passwords.json"
 tmpFile="/tmp/overthewire_savepass.tmp"
+
+function help_and_exit()
+{
+	echo "Usage: $0 <game> <level> <password>"
+	exit 1
+}
+
+[[ $# < 3 ]] && help_and_exit
+
+if ! ./validate_game.sh "$GAME"; then
+	echo "[OTW:$GAME] Invalid game! Create using ./add_game <game> <port>"
+	exit 1
+fi
 
 # Create and move to dir
 mkdir -p $dir
